@@ -50,8 +50,9 @@ p.l{color:var(--grey);margin-top:12px;font-size:15px}
 .pt.done .n{background:var(--green)}
 .pt.lock .n{background:#C3CBD4}
 .pt b{display:block;font-size:16px;margin-bottom:3px}
+.pt>div:last-child{min-width:0}
 .pt span{font-size:13px;color:var(--grey);line-height:1.4}
-.tag{display:inline-block;margin-top:7px;font-size:10px;font-weight:800;letter-spacing:.08em;
+.tag{display:inline-block;margin-top:8px;white-space:nowrap;font-size:10px;font-weight:800;letter-spacing:.08em;
   text-transform:uppercase;color:var(--red);border:1.5px solid var(--red);border-radius:30px;padding:3px 9px}
 .note{background:#FFF4F6;border-radius:14px;padding:14px 16px;margin-top:18px;font-size:14px;
   color:var(--ink);line-height:1.5}
@@ -74,6 +75,9 @@ p.l{color:var(--grey);margin-top:12px;font-size:15px}
   :root:not([data-theme="light"]) .opt.sel{background:#2A1419}
   :root:not([data-theme="light"]) .note{background:#1C2028}
   :root:not([data-theme="light"]) .btn{background:#F2F4F7;color:#13151A}
+  :root:not([data-theme="light"]) .hash{background:#1C2028;color:#F2F4F7}
+  :root:not([data-theme="light"]) .hash span{opacity:.75}
+  :root:not([data-theme="light"]) .note{background:#1C2028;color:#F2F4F7}
   :root:not([data-theme="light"]) .btn.red{background:var(--red);color:#fff}
 }
 :root[data-theme="dark"] body{background:#0C0E12}
@@ -140,7 +144,7 @@ const Q = [
 ];
 const PTS = [
  {n:"Парк Хуамин", d:"Крупнейший китайский сад в Европе. М. «Ботанический сад», вход свободный.",
-  t:"Общественное место", task:"Найдите дракона", qq:"Сколько фонарей у входа в сад?", aa:["Два","Четыре","Шесть"], ok:1},
+  t:"Общественное место", task:"Найдите стража", qq:"Сколько фонарей у входа в сад?", aa:["Два","Четыре","Шесть"], ok:1},
  {n:"Площадка фестиваля", d:"Ярмарка и уличная кухня «Китайского Нового года».",
   t:"Общественное место", task:"Попробуйте незнакомое", qq:"Что написано на табличке у жаровни?", aa:["Баоцзы","Танхулу","Цзяоцзы"], ok:2},
  {n:"Чайная церемония", d:"Заварите чай так, как это делают там.",
