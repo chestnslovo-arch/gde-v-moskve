@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Китайский уикенд</title>
+<style>
+:root{--red:#D70E2B;--ink:#13151A;--grey:#5D6570;--line:#E6E8EB;--green:#2E9E5B}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font:400 16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  color:var(--ink);background:#EEF3F7;display:flex;justify-content:center;min-height:100vh}
+.app{width:100%;max-width:430px;background:#fff;min-height:100vh;position:relative;
+  display:flex;flex-direction:column;box-shadow:0 0 50px rgba(0,0,0,.08)}
+.bar{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;
+  align-items:center;justify-content:space-between;flex-shrink:0}
+.bar .br{font-weight:800;letter-spacing:.14em;font-size:11px;color:var(--red)}
+.bar .st{font-size:12px;color:var(--grey);font-weight:600}
+.scr{flex:1;padding:24px 20px 110px;display:none;animation:in .25s ease}
+.scr.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:30px;line-height:1.12;font-weight:800;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--red)}
+h2{font-size:22px;font-weight:800;line-height:1.2;margin-bottom:6px}
+p.l{color:var(--grey);margin-top:12px;font-size:15px}
+.kick{font-size:11px;font-weight:800;letter-spacing:.16em;color:var(--red);margin-bottom:12px}
+.btn{position:fixed;left:50%;transform:translateX(-50%);bottom:20px;width:min(390px,calc(100% - 40px));
+  background:var(--ink);color:#fff;border:0;border-radius:14px;padding:17px;font-size:16px;
+  font-weight:700;font-family:inherit;cursor:pointer}
+.btn:disabled{background:#C3CBD4}
+.btn.red{background:var(--red)}
+.opt{width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;
+  padding:15px 16px;margin-top:10px;font:600 15px inherit;font-family:inherit;color:var(--ink);cursor:pointer}
+.opt.sel{border-color:var(--red);background:#FFF4F6}
+.dots{display:flex;gap:6px;margin-bottom:20px}
+.dots i{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.dots i.on{background:var(--red)}
+.map{height:190px;border-radius:16px;margin:18px 0;position:relative;border:1px solid #CFE0EE;
+  background:repeating-linear-gradient(60deg,#D8E7F3 0 2px,transparent 2px 26px),
+  repeating-linear-gradient(-60deg,#D8E7F3 0 2px,transparent 2px 26px),#E8F1F8}
+.pin{position:absolute;width:26px;height:26px;border-radius:50% 50% 50% 2px;transform:rotate(-45deg);
+  background:var(--red);box-shadow:0 4px 10px rgba(0,0,0,.18)}
+.pin.g{background:var(--green)}
+.pin.o{background:#fff;border:3px solid var(--red)}
+.pt{display:flex;gap:12px;align-items:flex-start;border:2px solid var(--line);border-radius:14px;
+  padding:14px;margin-bottom:10px;cursor:pointer;background:#fff}
+.pt.done{border-color:var(--green);background:#F2FBF5}
+.pt.lock{opacity:.5;cursor:default}
+.pt .n{width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;
+  font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pt.done .n{background:var(--green)}
+.pt.lock .n{background:#C3CBD4}
+.pt b{display:block;font-size:16px;margin-bottom:3px}
+.pt span{font-size:13px;color:var(--grey);line-height:1.4}
+.tag{display:inline-block;margin-top:7px;font-size:10px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--red);border:1.5px solid var(--red);border-radius:30px;padding:3px 9px}
+.note{background:#FFF4F6;border-radius:14px;padding:14px 16px;margin-top:18px;font-size:14px;
+  color:var(--ink);line-height:1.5}
+.note b{color:var(--red)}
+.big{font-size:60px;text-align:center;margin:26px 0 10px}
+.ok{background:var(--green);color:#fff;border-radius:16px;padding:18px;text-align:center;margin:18px 0}
+.ok b{font-size:19px;display:block}
+.ok span{font-size:13px;opacity:.9}
+.hash{background:var(--ink);color:#fff;border-radius:14px;padding:16px;margin-top:14px}
+.hash b{font-size:15px;display:block;margin-bottom:5px}
+.hash span{font-size:13px;opacity:.78;line-height:1.5;display:block}
+.foot{text-align:center;font-size:11px;color:#9AA7B4;padding:0 20px 16px}
+
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--ink:#F2F4F7;--grey:#9AA7B4;--line:#2A2F38}
+  :root:not([data-theme="light"]) body{background:#0C0E12}
+  :root:not([data-theme="light"]) .app{background:#15181E}
+  :root:not([data-theme="light"]) .opt,
+  :root:not([data-theme="light"]) .pt{background:#1C2028}
+  :root:not([data-theme="light"]) .opt.sel{background:#2A1419}
+  :root:not([data-theme="light"]) .note{background:#1C2028}
+  :root:not([data-theme="light"]) .btn{background:#F2F4F7;color:#13151A}
+  :root:not([data-theme="light"]) .btn.red{background:var(--red);color:#fff}
+}
+:root[data-theme="dark"] body{background:#0C0E12}
+:root[data-theme="dark"] .app{background:#15181E}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="bar"><div class="br">МОСФОТО · УИКЕНД</div><div class="st" id="st">прототип</div></div>
+
+  <div class="scr on" id="s0">
+    <div class="kick">Где в Москве?</div>
+    <h1>Китайский<br><em>уикенд</em></h1>
+    <p class="l">Три точки, один день и ни одного выезда за МКАД. Ответьте на три вопроса —
+      соберём маршрут под вас.</p>
+    <div class="map" style="margin-top:26px">
+      <div class="pin" style="left:54px;top:40px"></div>
+      <div class="pin o" style="left:162px;top:92px"></div>
+      <div class="pin o" style="left:96px;top:136px"></div>
+    </div>
+    <p class="l">Все точки маршрута — общественные пространства. Вход свободный.</p>
+    <button class="btn red" onclick="go(1)">Собрать маршрут</button>
+  </div>
+
+  <div class="scr" id="s1"></div>
+
+  <div class="scr" id="s2">
+    <div class="kick">Ваш маршрут</div>
+    <h2 id="rt">Три точки на день</h2>
+    <p class="l" id="rd"></p>
+    <div class="map">
+      <div class="pin" id="p1" style="left:54px;top:40px"></div>
+      <div class="pin o" id="p2" style="left:162px;top:92px"></div>
+      <div class="pin o" id="p3" style="left:96px;top:136px"></div>
+    </div>
+    <div id="pts"></div>
+    <div class="note">Места бывают маленькие. Если идёте в чайную или ресторан —
+      <b>бронируйте заранее</b>, иначе придётся ждать.</div>
+    <button class="btn" id="fin" disabled onclick="go(4)">Завершить маршрут</button>
+  </div>
+
+  <div class="scr" id="s3"></div>
+
+  <div class="scr" id="s4">
+    <div class="big">🏮</div>
+    <h2 style="text-align:center">Маршрут пройден</h2>
+    <p class="l" style="text-align:center">Три задания закрыты. Заберите карточку с печатью
+      на последней точке.</p>
+    <div class="ok"><b>3 из 3</b><span>китайский уикенд</span></div>
+    <div class="hash"><b>Выложите кадр дня</b>
+      <span>Хештег #гдевмоскве в ВК или Максе — и вы в розыгрыше мерча.
+      Для каждой точки своё задание на фото.</span></div>
+    <button class="btn red" onclick="location.reload()">Пройти заново</button>
+  </div>
+
+  <div class="foot">Прототип механики. Собран под тестовое задание для «Мосфото».</div>
+</div>
+
+<script>
+const Q = [
+ {q:"Сколько времени есть?", a:["Полдня","Весь день","Только пара часов"]},
+ {q:"С кем идёте?", a:["Вдвоём","С детьми","Один"]},
+ {q:"Готовы попробовать незнакомое?", a:["Да, в этом и смысл","Осторожно","Лучше знакомое"]}
+];
+const PTS = [
+ {n:"Парк Хуамин", d:"Крупнейший китайский сад в Европе. М. «Ботанический сад», вход свободный.",
+  t:"Общественное место", task:"Найдите дракона", qq:"Сколько фонарей у входа в сад?", aa:["Два","Четыре","Шесть"], ok:1},
+ {n:"Площадка фестиваля", d:"Ярмарка и уличная кухня «Китайского Нового года».",
+  t:"Общественное место", task:"Попробуйте незнакомое", qq:"Что написано на табличке у жаровни?", aa:["Баоцзы","Танхулу","Цзяоцзы"], ok:2},
+ {n:"Чайная церемония", d:"Заварите чай так, как это делают там.",
+  t:"Общественное место", task:"Заварите свой чай", qq:"Сколько проливов делает мастер?", aa:["Один","Три","Семь"], ok:1}
+];
+let step=0, ans=[], done=[false,false,false], cur=0;
+
+function go(n){
+  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+  document.getElementById('s'+n).classList.add('on');
+  if(n===1) quiz();
+  if(n===2) route();
+  window.scrollTo(0,0);
+}
+function quiz(){
+  const q=Q[step];
+  document.getElementById('st').textContent='вопрос '+(step+1)+' из 3';
+  document.getElementById('s1').innerHTML =
+   '<div class="dots">'+Q.map((_,i)=>'<i class="'+(i<=step?'on':'')+'"></i>').join('')+'</div>'+
+   '<h2>'+q.q+'</h2>'+
+   q.a.map((a,i)=>'<button class="opt" onclick="pick('+i+',this)">'+a+'</button>').join('')+
+   '<button class="btn" id="nx" disabled onclick="next()">Дальше</button>';
+}
+function pick(i,el){
+  document.querySelectorAll('#s1 .opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel'); ans[step]=i; document.getElementById('nx').disabled=false;
+}
+function next(){ step++; step<Q.length ? quiz() : go(2); }
+function route(){
+  document.getElementById('st').textContent='маршрут';
+  const long = ans[0]===1;
+  document.getElementById('rd').textContent = long
+    ? "Полный маршрут: парк, фестиваль и чайная. Три-четыре часа с дорогой и едой."
+    : "Короткий вариант: точки рядом друг с другом, уложитесь в полдня.";
+  document.getElementById('pts').innerHTML = PTS.map((p,i)=>{
+    const lock = i>0 && !done[i-1];
+    return '<div class="pt '+(done[i]?'done':'')+(lock?' lock':'')+'" '+
+      (lock?'':'onclick="task('+i+')"')+'>'+
+      '<div class="n">'+(done[i]?'✓':i+1)+'</div><div><b>'+p.n+'</b>'+
+      '<span>'+(done[i]?'Задание закрыто':p.task)+'</span>'+
+      '<div class="tag">'+p.t+'</div></div></div>';
+  }).join('');
+  [1,2,3].forEach(i=>{ const el=document.getElementById('p'+i);
+    el.className='pin'+(done[i-1]?' g':(i-1===doneCount()?'':' o')); });
+  document.getElementById('fin').disabled = !done.every(Boolean);
+}
+function doneCount(){ return done.filter(Boolean).length; }
+function task(i){
+  cur=i; const p=PTS[i];
+  document.getElementById('st').textContent='точка '+(i+1);
+  document.getElementById('s3').innerHTML =
+   '<div class="kick">Задание '+(i+1)+' из 3</div><h2>'+p.task+'</h2>'+
+   '<p class="l">'+p.d+'</p>'+
+   '<div class="note" style="background:#F2F6FA">Вместо QR — вопрос про то, что видно только '+
+   'на месте. Не нужно печатать коды и согласовывать их размещение.</div>'+
+   '<h2 style="margin-top:22px;font-size:17px">'+p.qq+'</h2>'+
+   p.aa.map((a,k)=>'<button class="opt" onclick="ansk('+k+',this)">'+a+'</button>').join('')+
+   '<button class="btn" id="ck" disabled onclick="check()">Проверить</button>';
+  go(3);
+}
+let pickedK=-1;
+function ansk(k,el){
+  document.querySelectorAll('#s3 .opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel'); pickedK=k; document.getElementById('ck').disabled=false;
+}
+function check(){
+  const p=PTS[cur];
+  if(pickedK===p.ok){ done[cur]=true; pickedK=-1; go(2); }
+  else {
+    const b=document.getElementById('ck');
+    b.textContent='Не то — осмотритесь ещё раз'; b.style.background='var(--red)';
+    setTimeout(()=>{b.textContent='Проверить';b.style.background=''},1600);
+  }
+}
+</script>
+</body>
+</html>
