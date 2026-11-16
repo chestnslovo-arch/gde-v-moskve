@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light only">
 <title>Китайский уикенд</title>
 <style>
 :root{--red:#D70E2B;--ink:#13151A;--grey:#5D6570;--line:#E6E8EB;--green:#2E9E5B}
@@ -66,28 +67,6 @@ p.l{color:var(--grey);margin-top:12px;font-size:15px}
 .hash span{font-size:13px;opacity:.78;line-height:1.5;display:block}
 .foot{text-align:center;font-size:11px;color:#9AA7B4;padding:0 20px 16px}
 
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){--ink:#F2F4F7;--grey:#9AA7B4;--line:#2A2F38}
-  :root:not([data-theme="light"]) body{background:#0C0E12}
-  :root:not([data-theme="light"]) .app{background:#15181E}
-  :root:not([data-theme="light"]) .opt,
-  :root:not([data-theme="light"]) .pt{background:#1C2028}
-  :root:not([data-theme="light"]) .opt.sel{background:#2A1419}
-  :root:not([data-theme="light"]) .note{background:#1C2028}
-  :root:not([data-theme="light"]) .btn{background:#F2F4F7;color:#13151A}
-  :root:not([data-theme="light"]) .hash{background:#1C2028;color:#F2F4F7}
-  :root:not([data-theme="light"]) .hash span{opacity:.75}
-  :root:not([data-theme="light"]) .note{background:#1C2028;color:#F2F4F7}
-  :root:not([data-theme="light"]) .map{border-color:#2A3340;
-    background:repeating-linear-gradient(60deg,#243040 0 2px,transparent 2px 26px),
-    repeating-linear-gradient(-60deg,#243040 0 2px,transparent 2px 26px),#171F2B}
-  :root:not([data-theme="light"]) .pt.done{background:#14241A;border-color:#2E9E5B}
-  :root:not([data-theme="light"]) .opt{color:#F2F4F7}
-  :root:not([data-theme="light"]) .pt b{color:#F2F4F7}
-  :root:not([data-theme="light"]) .btn.red{background:var(--red);color:#fff}
-}
-:root[data-theme="dark"] body{background:#0C0E12}
-:root[data-theme="dark"] .app{background:#15181E}
 </style>
 </head>
 <body>
