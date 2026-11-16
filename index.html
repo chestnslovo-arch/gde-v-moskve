@@ -132,12 +132,13 @@ const PTS = [
   t:"Общественное место", task:"Найдите стража", qq:"Сколько фонарей у входа в сад?", aa:["Два","Четыре","Шесть"], ok:1},
  {n:"Площадка фестиваля", d:"Ярмарка и уличная кухня «Китайского Нового года».",
   t:"Общественное место", task:"Попробуйте незнакомое", qq:"Что написано на табличке у жаровни?", aa:["Баоцзы","Танхулу","Цзяоцзы"], ok:2},
- {n:"Чайная церемония", d:"Заварите чай так, как это делают там.",
-  t:"Общественное место", task:"Заварите свой чай", qq:"Сколько проливов делает мастер?", aa:["Один","Три","Семь"], ok:1}
+ {n:"Красная площадь", d:"Фонари, ярмарка и уличная кухня — здесь пробуют больше всего.",
+  t:"Общественное место", task:"Найдите кадр дня", qq:"Какого цвета фонари над ярмаркой?", aa:["Белые","Красные","Синие"], ok:1}
 ];
 let step=0, ans=[], done=[false,false,false], cur=0;
 
 function go(n){
+  if(n===4) setTimeout(finalShot,0);
   document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
   document.getElementById('s'+n).classList.add('on');
   if(n===1) quiz();
@@ -194,6 +195,18 @@ let pickedK=-1;
 function ansk(k,el){
   document.querySelectorAll('#s3 .opt').forEach(o=>o.classList.remove('sel'));
   el.classList.add('sel'); pickedK=k; document.getElementById('ck').disabled=false;
+}
+const SHOTS = [
+ {t:"Сердце из рук", d:"Сложите сердце из ладоней так, чтобы за ним была видна ярмарка."},
+ {t:"Селфи с предметом", d:"Найдите предмет, который выдаёт это место, и снимите селфи с ним."},
+ {t:"Буква М из рук", d:"Соберите букву М из рук — вдвоём или всей компанией — на фоне фонарей."}
+];
+function finalShot(){
+  // 0 — вдвоём, 1 — с детьми, 2 — один
+  const who = ans[1] === undefined ? 0 : ans[1];
+  const pick = who === 1 ? SHOTS[2] : who === 2 ? SHOTS[1] : SHOTS[0];
+  document.getElementById("shotTitle").textContent = pick.t;
+  document.getElementById("shotText").textContent = pick.d;
 }
 function check(){
   const p=PTS[cur];
